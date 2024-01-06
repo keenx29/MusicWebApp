@@ -283,7 +283,8 @@ namespace MusicWebApp.Controllers
 				}
 				model.Username = loggedUser.Username;
 			}
-			return View(model);
+			return RedirectToAction("Index", "Home");
+			//test
 		}
 		[HttpPost]
 		public IActionResult Manage(SongVM model)
