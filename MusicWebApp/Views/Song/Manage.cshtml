@@ -1,0 +1,54 @@
+﻿@using MusicWebApp.Entities
+@model MusicWebApp.ViewModels.Songs.SongVM
+@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Manage Song";
+}
+@section Navbar{
+	@Html.Partial("_Navbar")
+}
+@section Playlists{
+	
+}
+@section Player{
+	@Html.Partial("_Player-Cover")
+}
+@section Username{
+	@Html.Partial("_Username")
+}
+@section MainPage{
+	<fieldset class="loginform p-1">
+		<legend>MANAGE SONG</legend>
+		<form action="/Song/Manage" method="post"  class="flex-column justify-content-between d-flex">
+			@Html.HiddenFor(m => m.userId)
+			@Html.HiddenFor(m => m.songId)
+			<div class="row text-center border-top p-1">
+				<div class="col">Name</div>
+				<div class="col">Artist</div>
+				<div class="col">Length</div>
+			</div>
+			<div class="row text-center border-bottom border-top p-1">
+				<div class="col">@(Model.Song.Name)</div>
+				<div class="col">@(Model.Song.Artist)</div>
+				<div class="col">@(Model.Song.Duration)</div>
+			</div>
+			<div class="container flex-fill d-flex flex-column justify-content-evenly text-center">
+				<div class="form-group flex-fill">
+					<label for="playlistId" class="form-label mt-4">Choose a playlist</label>
+					<select class="form-select bg-light text-dark outline-primary" id="playlistId" name="playlistId">
+						@foreach (Playlist playlist in Model.Playlists)
+						{
+							<option value="@playlist.Id">
+								@playlist.Name
+							</option>
+						}
+					</select>
+					<input type="hidden" id="playlistName" name="playlistName" />
+				</div>
+				<div class="m-1">
+					<button class="btn btn-primary text-dark" onclick="setTemps()" type="submit" >Add to playlist</button>
+				</div>
+			</div>
+		</form>
+	</fieldset>
+}

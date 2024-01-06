@@ -1,0 +1,73 @@
+﻿@using MusicWebApp.Entities
+@model MusicWebApp.ViewModels.Songs.SongVM
+@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Song List";
+}
+@section Navbar{
+	@Html.Partial("_Navbar")
+}
+@section Playlists{
+	<span></span>
+}
+@section Player{
+	
+}
+@section MainPage{
+	<div class="table-responsive">
+			<table class="table table-striped table-dark text-center caption-top">
+				<caption>All Songs</caption>
+				<thead>
+				
+					<tr>
+						<th scope="row">#</th>
+						<th scope="col">Title</th>
+						<th scope="col">Artist</th>
+						<th scope="col">Duration</th>
+						<th scope="col">Edit</th>
+						<th scope="col">Manage</th>
+					</tr>
+				</thead>
+			
+				<tbody class="table-group-divider">
+					@{
+						int i = 1;
+					}
+					@foreach (Song song in Model.Songs.OrderBy(u => u.Id))
+					{
+						<tr>
+							<th scope="row" id="@("row" + i)">@i</th>
+							<td scope="col">@song.Name</td>
+							<td scope="col">@song.Artist</td>
+							<td scope="col">@song.Duration</td>
+
+							<td scope="col">
+								<a href="/Song/Edit?songId=@(song.Id)" class="btn btn-warning text-dark" onclick="setIdsInTemp()">
+									<i class="bi bi-pencil-square"></i>
+								</a>
+								
+							</td>
+							<td scope="col">
+								<a href="/Song/Manage?songId=@(song.Id)" class="btn btn-success text-dark" onclick="setIdsInTemp()">
+									<i class="bi bi-music-note-list"></i>
+								</a>
+							</td>
+						</tr>
+						i++;
+					}
+				</tbody>
+			</table>
+	</div>
+	<script>
+		function setIdsInTemp() 
+		{
+			@if (Model != null)
+			{
+				TempData["UserId"] = Model.userId != null ? Model.userId : 0;
+			}
+		}
+	</script>
+}
+@section Username{
+	@Html.Partial("_Username")
+}

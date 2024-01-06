@@ -1,0 +1,13 @@
+﻿@using MusicWebApp.Entities;
+@foreach (Playlist playlist in Model.Playlists)
+{
+	<div class="row d-flex align-items-center bg-primary text-dark">
+		<div class="col-4 p-1 d-inline-flex justify-content-center">
+			<a href="/Playlist/Manage?playlistId=@playlist.Id"><img class="playlist-preview-img" src="@playlist.ImageURL"></a>
+		</div>
+		<div class="col-4 p-0 text-center">
+			<a class="nav-link" href="/Playlist/Manage?playlistId=@playlist.Id">@playlist.Name</a>
+		</div>
+	</div>
+}
+

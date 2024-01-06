@@ -1,0 +1,46 @@
+﻿@using MusicWebApp.Entities
+@model MusicWebApp.ViewModels.Playlists.PlaylistVM
+@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Playlists";
+}
+
+@section Navbar{
+	@Html.Partial("_Navbar")
+}
+
+@section Playlists{
+	
+}
+
+@section Player{
+	@Html.Partial("_Player-Cover")
+}
+
+@section Username{
+	@Html.Partial("_Username")
+}
+
+@section MainPage{
+	<div class="row p-2 my-2 mt-4">
+		@if (Model != null)
+		{
+			foreach (Playlist playlist in Model.Playlists)
+			{
+				<div class="col-4 mb-5">
+
+					<div class="card bg-primary">
+						<img src="@playlist.ImageURL" class="card-img-top" />
+						<a href="/Playlist/Manage?playlistId=@(playlist.Id)" onclick="setIdInTemp()" class="m-auto">
+							<div class="card-body text-dark ">
+								<h5 class="card-title">@playlist.Name</h5>
+							</div>
+						</a>
+					</div>
+
+				</div>
+			}
+		}
+	</div>
+
+}

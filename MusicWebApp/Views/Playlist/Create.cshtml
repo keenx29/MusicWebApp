@@ -1,0 +1,57 @@
+﻿@using MusicWebApp.Entities
+@model MusicWebApp.ViewModels.Playlists.CreatePlaylistVM
+@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Playlists";
+}
+@section Navbar{
+	@Html.Partial("_Navbar")
+}
+@section Playlists{
+	
+}
+@section Player{
+	@Html.Partial("_Player-Cover")
+}
+@section Username{
+	@Html.Partial("_Username")
+}
+@section MainPage{
+	<fieldset class="loginform">
+		<legend>ADD PLAYLIST</legend>
+		<form action="/Playlist/Create" method="post">
+			@Html.HiddenFor(m => m.userId)
+			<div class="logincontainer">
+				<div class="login">
+					<div class="loginrow">
+						<div>
+							Title:
+						</div>
+						<div>
+							@Html.TextBoxFor(m => m.Name)
+						</div>
+						<div>
+							@Html.ValidationMessageFor(m => m.Name)
+						</div>
+					</div>
+					<div class="loginrow">
+						<div>
+							Image URL:
+						</div>
+						<div>
+							@Html.TextBoxFor(m => m.ImageURL)
+						</div>
+						<div>
+							@Html.ValidationMessageFor(m => m.ImageURL)
+						</div>
+					</div>
+					<div class="loginrow">
+						<div>
+							<input class="right btn btn-primary" type="submit" value="Add playlist" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</fieldset>
+}

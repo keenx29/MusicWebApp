@@ -1,0 +1,58 @@
+﻿@model MusicWebApp.ViewModels.Users.LoginVM
+@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Register";
+}
+@section Navbar{
+	@Html.Partial("_Navbar")
+}
+@section Playlists{
+	
+}
+@section Player{
+	@Html.Partial("_Player-Cover")
+}
+@section Username{
+	<a href="/User/Login" id="logout" class="nav-link text-info btn bg-dark rounded icon-link-hover icon-link m-2 p-1">
+		Back to login
+	</a>
+}
+@section MainPage
+	{
+	<fieldset class="loginform">
+		<legend>REGISTER</legend>
+		<form action="/User/Register" method="post">
+			<div class="logincontainer">
+				<div class="login">
+					<div class="loginrow">
+						<div>
+							Username:
+						</div>
+						<div>
+							@Html.TextBoxFor(m => m.Username)
+						</div>
+						<div>
+							@Html.ValidationMessageFor(m => m.Username)
+						</div>
+					</div>
+					<div class="loginrow">
+						<div>
+							Password:
+						</div>
+						<div>
+							@Html.PasswordFor(m => m.Password)
+						</div>
+						<div>
+							@Html.ValidationMessageFor(m => m.Password)
+						</div>
+					</div>
+					<div class="loginrow">
+						<div>
+							<input class="btn btn-primary py-1 px-2" type="submit" value="Register" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</fieldset>
+}

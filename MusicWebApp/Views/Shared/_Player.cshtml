@@ -1,0 +1,99 @@
+﻿@using MusicWebApp.Entities;
+<audio id="song">
+	<source src="@(Model != null && Model.CurrentSong != null ? Model.CurrentSong.AudioURL : "")" type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio>
+<div class="player-grid d-flex justify-content-between bg-primary text-dark p-1">
+	<div class="col-4 d-flex flex-column justify-content-evenly align-items-start">
+		<div>@(Model != null && Model.CurrentSong != null ? Model.CurrentSong.Name : "Current Song")</div>
+		<div>@(Model != null && Model.CurrentSong != null ? Model.CurrentSong.Artist : "Song Artist")</div>
+	</div>
+	<div class="col-4 d-flex flex-column justify-content-evenly align-items-center">
+		<div class="controls">
+			<div><i class="bi bi-skip-backward-fill"></i></div>
+			<div onclick="playPause()"><i class="bi bi-play-fill" id="controlIcon"></i></div>
+			<div><i onclick="skipSong()" class="bi bi-skip-forward-fill"></i></div>
+		</div>
+		<div class="progress-bar">
+			<input type="range" value="0" id="progress" />
+		</div>
+	</div>
+	<div class="col-4 text-center d-flex justify-content-end align-items-center">Volume Controls</div>
+</div>
+<script>
+	var progress = document.getElementById("progress");
+	var song = document.getElementById("song");
+	var controlIcon = document.getElementById("controlIcon");
+	var currentSongIndex = -1;
+	song.addEventListener('ended', function next() {
+		currentSongIndex++;
+		if (@Model != null && Model.CurrentSong != null) {
+			if (currentSongIndex >= @(Model != null ? Model.TotalSongs : 0)) {
+				currentSongIndex = 0;
+			}
+			if (currentSongIndex < @(Model != null ? Model.TotalSongs - 1 : 0)) {
+	@Model.CurrentSong = Model.Songs[currentSongIndex + 1];
+			}
+			song.src = @(Model != null && Model.CurrentSong != null ?? Model.CurrentSong.AudioURL);
+			song.load();
+		}
+
+	})
+
+	song.onloadedmetadata = function () {
+		progress.max = song.duration;
+		progress.value = song.currentTime;
+		song.volume = 0.2
+		song.pause()
+	}
+
+	function playPause() {
+		if (controlIcon.classList.contains("bi-pause-fill")) {
+			song.pause();
+			controlIcon.classList.remove("bi-pause-fill");
+			controlIcon.classList.add("bi-play-fill");
+		} else {
+			song.play();
+			controlIcon.classList.add("bi-pause-fill");
+			controlIcon.classList.remove("bi-play-fill");
+		}
+	}
+	function skipSong() {
+		var song = document.getElementById("song");
+	@if (Model != null && Model.Songs != null)
+	{
+
+		int currentSongIndex = Model.Songs.IndexOf(Model.CurrentSong);
+		if (currentSongIndex < Model.TotalSongs - 1)
+		{
+			Model.CurrentSong = Model.Songs[currentSongIndex + 1];
+		}
+	}
+			song.src = @(Model != null && Model.CurrentSong != null ?? Model.CurrentSong.AudioURL)
+		song.onloadedmetadata = function() {
+			song.play()
+		}
+	}
+
+	if (song.play()) {
+		setInterval(() => { progress.value = song.currentTime; }, 500);
+	}
+
+	progress.onchange = function () {
+		song.play();
+		song.currentTime = progress.value;
+		controlIcon.classList.add("bi-pause-fill");
+		controlIcon.classList.remove("bi-play-fill");
+	}
+	progress.onended = function () {
+		currentSongIndex++;
+		if (currentSongIndex >= @(Model != null ? Model.TotalSongs : 0)) {
+			currentSongIndex = 0;
+		}
+		if (currentSongIndex < @(Model != null ? Model.TotalSongs - 1 : 0)) {
+	@Model.CurrentSong = Model.Songs[currentSongIndex + 1];
+		}
+		song.src = @(Model != null && Model.CurrentSong != null ?? Model.CurrentSong.AudioURL);
+		song.load();
+	}
+</script>

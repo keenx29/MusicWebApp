@@ -1,0 +1,224 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin: 0px;
+}
+
+.layout {
+    margin: 0px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-areas: 'navbar maincontect maincontect maincontect maincontect'
+        'navbar maincontect maincontect maincontect maincontect'
+        'navbar maincontect maincontect maincontect maincontect'
+        'navbar maincontect maincontect maincontect maincontect'
+        'navbar maincontect maincontect maincontect maincontect'
+        'navbar maincontect maincontect maincontect maincontect'
+        'navbar maincontect maincontect maincontect maincontect'
+        'navbar maincontect maincontect maincontect maincontect'
+        'navbar player player player player'
+        'navbar player player player player';
+    column-gap:0.5vh;
+    height: 99vh;
+}
+
+.grid {
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-template-rows: 20% 80%;
+    height: 100%;
+    row-gap: 0;
+    grid-area: navbar;
+}
+
+.navbar {
+    width: 100%;
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 1%;
+    vertical-align: middle;
+}
+.playlist-navbar {
+    width: 100%;
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 1%;
+    margin-top: 0.5vh;
+    box-shadow: 0px 20px 10px rgba(0,0,0, 1);
+}
+.playlist .navbar div{
+    vertical-align: top;
+}
+
+.playlist-row {
+    display: grid;
+    grid-auto-columns: auto auto auto;
+    grid-auto-flow: column;
+    column-gap: 5%;
+    text-align: center;
+    padding: 2px;
+}
+
+.maincontent {
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+    grid-area: maincontect;
+    padding: 1%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: 2px solid black;
+    box-shadow: 0 10px 20px rgba(255,26,26,0.22);
+}
+
+.logingreet{
+    position:fixed;
+    top: 1vh;
+    right: 1vw;
+    display: inline-block;
+}
+
+.playerContainer {
+    grid-area: player;
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    margin-top: 0.5vh;
+    overflow-y: hidden;
+}
+
+.loginform{
+    width: 100%;
+    height: 100%;
+}
+.loginform legend{
+    width: 100%;
+    height: 10%;
+}
+.loginform form{
+    width: 100%;
+    height: 90%;
+    margin: 0;
+}
+.login {
+    display:flex;
+    flex-flow:column;
+}
+.loginrow {
+    padding: 2px;
+    text-align: center;
+}
+.logincontainer{
+    width: 100%;
+    height: 100%;
+}
+/*Index main page*/
+.main-container{
+}
+.main-container div{
+    border: 1px solid black;
+    padding: 0.5%;
+    text-align: center;
+}
+#logout-container {
+    position:absolute;
+    top: 0%;
+    right: 1%;
+}
+#logout {
+    opacity: 75%;
+}
+#logout:hover {
+    opacity: 100%;
+    transform: scale(1.1)
+}
+a:hover {
+    transform: scale(1.1)
+}
+img{
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+.card-img-top {
+    height:15vh;
+}
+.dropdown-menu a:hover {
+    transform: scale(1);
+    background-color: var(--bs-dark-bg-subtle);
+    color: var(--bs-primary-text-emphasis);
+}
+/*Player*/
+.playlist-img{
+    height:200px;
+    width:200px;
+    object-fit: fill;
+}
+.player-grid{
+    height:100%;
+}
+#progress{
+    -webkit-appearance: none;
+    width:100%;
+    height: 2vh;
+    border-radius: 2vh;
+    background: black;
+    cursor: pointer;
+}
+#progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: white;
+    width: 1vw;
+    height: 2vh;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+.progress-bar{
+    width: 100%;
+}
+.controls {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    overflow: visible;
+}
+.controls div {
+    width: 3vw;
+    height: 5vh;
+    background: black;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.controls div:nth-child(2){
+    transform: scale(1.2);
+    color: lightgreen;
+}
+.player-cover{
+    height: 100%;
+    width: 100%;
+}
+/*Playlists navbar*/
+.playlist-preview-img {
+    height: 10vh;
+    width: 5vw;
+    object-fit: fill;
+}
+*{
+    overflow: hidden;
+}
+body{
+    margin: 0.25vw;
+}

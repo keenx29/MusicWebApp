@@ -1,0 +1,64 @@
+﻿<html>
+<head>
+	<title>@ViewData["title"]</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link href="/css/bootswatchTheme.css" rel="stylesheet" />
+	<link href="/css/site.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+	<div class="layout">
+		<div class="grid">
+			<div class="align-items-center text-center d-flex flex-column justify-content-between navbar bg-primary link-underline-none" data-bs-theme="dark">
+				@RenderSection("Navbar")
+			</div>
+			<div class="playlist-navbar text-dark bg-primary pt-1 overflow-x-hidden overflow-y-scroll">
+				<div class="row justify-content-center text-center align-items-center mb-1">
+					<div class="col-4">
+						<a href="/Playlist/Create" class="nav-link" onclick="setIdInTemp()"><i class="bi bi-music-note-list"></i></a>
+					</div>
+					<div class="col-4">
+						<span>Your Library</span>
+					</div>
+					<div class="col-4">
+						<a href="#" class="nav-link"><i class="bi bi-share-fill"></i></a>
+					</div>
+				</div>
+				@RenderSection("Playlists")
+			</div>
+		</div>
+		<div class="maincontent text-light bg-dark">
+			<div class="link" id="logout-container">
+				@RenderSection("Username")
+			</div>
+				@RenderSection("MainPage")
+		</div>
+		<div class="playerContainer">
+			@RenderSection("Player")
+		</div>
+	</div>
+	<script type="text/javascript">
+		function setIdInTemp() {
+			@if (Model != null) {
+				TempData["UserId"] = Model.userId != null ? Model.userId : 0;
+			}
+		}
+		function setTemps() {
+			var playlistId = document.getElementById("playlistId").value;
+			var playlistName = document.getElementById("playlistId")
+								.options[document.getElementById("playlistID").selectedIndex.text;
+			document.getElementById("playlistName").value = playlistName;
+			@TempData["PlaylistId"] = playlistId;
+			@TempData["PlaylistName"] = playlistName;
+		}
+		function setPlaylistTemps(input) {
+			var playlistId = input;
+			if (playlistId == null || playlistId == 0) {
+				return;
+			}
+			@TempData["PlaylistId"] = playlistId
+		}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

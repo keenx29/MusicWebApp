@@ -1,0 +1,65 @@
+﻿@using MusicWebApp.Entities
+@model MusicWebApp.ViewModels.Playlists.PlaylistVM
+@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Playlists";
+}
+@section Navbar{
+	@Html.Partial("_Navbar")
+}
+@section Playlists{
+	@Html.Partial("_Playlists")
+}
+@section Player{
+	@Html.Partial("_Player")
+}
+@section Username{
+	@Html.Partial("_Username")
+}
+@section MainPage{
+	<div class="row m-2 link-underline-primary pb-4">
+		<div class="col-3">
+			<img class="playlist-img" src="@Model.ImageURL" />
+		</div>
+		<div class="col-9 d-flex justify-content-between flex-column m-0">
+			<div class="row ">@Model.Name</div>
+			<div class="row text-center">@(Model.Songs.Count() == 1 ? Model.Songs.Count() + " Total Song" : Model.Songs.Count() + " Total Songs")</div>
+			<div class="row d-flex flex-row">
+				<div class="m-0 p-0"> 
+					<button onclick="playlistPlay()" class="btn btn-primary text-dark d-inline me-2">Play</button>
+					<button onclick="playlistShuffle()" class="btn btn-primary text-dark d-inline">Shuffle</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-striped table-dark text-center caption-top">
+			<thead>
+				<tr>
+					<th scope="row">#</th>
+					<th scope="col">Title</th>
+					<th scope="col">Artist</th>
+					<th scope="col">Duration</th>
+				</tr>
+			</thead>
+			<tbody class="table-group-divider">
+				@{
+					int i = 1;
+				}
+				@foreach (Song song in Model.Songs.OrderBy(u => u.Id))
+				{
+					<tr>
+						<th scope="row">@i</th>
+						<td scope="col">@song.Name</td>
+						<td scope="col">@song.Artist</td>
+						<td scope="col">@song.Duration</td>
+					</tr>
+					i++;
+				}
+			</tbody>
+
+		</table>
+	</div>
+
+
+}

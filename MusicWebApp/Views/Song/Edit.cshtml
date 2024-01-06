@@ -1,0 +1,79 @@
+﻿@using MusicWebApp.Entities
+@model MusicWebApp.ViewModels.Songs.SongVM
+@{
+	Layout = "/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Edit Song";
+}
+@section Navbar{
+	@Html.Partial("_Navbar")
+}
+@section Playlists{
+	<span></span>
+}
+@section Player{
+	@Html.Partial("_Player-Cover")
+}
+@section Username{
+	@Html.Partial("_Username")
+}
+@section MainPage{
+	<fieldset class="loginform">
+		<legend>EDIT SONG</legend>
+		<form method="post" id="form">
+			@Html.HiddenFor(m => m.userId)
+			@Html.HiddenFor(m => m.songId)
+			<div class="logincontainer">
+				<div class="login">
+					<div class="loginrow">
+						<div>
+							Title:
+						</div>
+						<div>
+							@Html.TextBoxFor(m => m.Name)
+						</div>
+						<div>
+							@Html.ValidationMessageFor(m => m.Name)
+						</div>
+					</div>
+					<div class="loginrow">
+						<div>
+							Artist:
+						</div>
+						<div>
+							@Html.TextBoxFor(m => m.Artist)
+						</div>
+						<div>
+							@Html.ValidationMessageFor(m => m.Artist)
+						</div>
+					</div>
+					<div class="loginrow">
+						<div>
+							Dropbox URL:
+						</div>
+						<div id="songURL">
+							@Html.TextBoxFor(m => m.AudioURL)
+						</div>
+						<div>
+							@Html.ValidationMessageFor(m => m.AudioURL)
+						</div>
+					</div>
+					<div class="loginrow">
+						<div>
+							<input class="right btn btn-success" type="submit" value="Save" onclick="getSaveAction()" />
+							<input class="right btn btn-danger" type="submit" value="Delete" onclick="getDeleteAction()" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</fieldset>
+	<script>
+		var form = document.getElementById("form");
+		function getSaveAction() {
+			form.action = "/Song/Edit";
+		}
+		function getDeleteAction() {
+			form.action = "/Song/Delete";
+		}
+	</script>
+}
